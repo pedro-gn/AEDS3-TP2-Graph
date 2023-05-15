@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
     int numberOfTests;
     int nrows=0, ncols=0;
     int **testMatrix;
-
+    Graph graph;
 
     if(argc == 3){
         strategy = atoi(argv[1]);
@@ -26,14 +26,15 @@ int main(int argc, char *argv[]){
     // Numero de casos de testes no arquivo de entrada
     numberOfTests = getNumberOfTests(inputFile);
 
-    // A cada iteração temos o numero de colunas, linhas e a matriz do teste
+    // Um dos testes por iteração
     for(int i = 0; i < numberOfTests; i++){
 
+        // Le a matriz de testes e o numero de linhas e colunas
         readMatrix(inputFile, &nrows, &ncols, &testMatrix);
 
-        Vertice *vertices = createVerticesArr(testMatrix, nrows, ncols);
+        // Cria o grafo
+        createGraph(&graph, testMatrix, nrows, ncols);
 
-        int **adjMatrix = createAdjMatrix(testMatrix, nrows, ncols, vertices);
 
 
         if(strategy == 1){
@@ -44,7 +45,6 @@ int main(int argc, char *argv[]){
 
 
         
-        free(vertices);
     }
 
 

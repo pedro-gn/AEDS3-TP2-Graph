@@ -11,12 +11,14 @@ typedef struct{
     int row,col;
 }Vertice;
 
-int **createAdjMatrix(int **matrix, int nrows, int ncols, Vertice *vertices);
+// O grafo tera o array de vertices, a matrix de adjacencia e quantos vertices possui
+typedef struct{
+    Vertice *vertices;
+    int nvertices;
+    int **adjMatrix;
+}Graph;
 
-
-Vertice *createVerticesArr(int **matrix, int nrows, int ncols);
-
-
+void createGraph(Graph *graph, int **matrix, int nrows, int ncols);
 
 
 #endif

@@ -1,50 +1,39 @@
 #include "graph.h"
 
 
+// Cria o grafo com o array de vertices e a matrix de adjacencia
+void createGraph(Graph *graph, int **matrix, int nrows, int ncols){
+    graph->nvertices = nrows * ncols;
+    graph->vertices = (Vertice*)malloc(graph->nvertices * sizeof(Vertice));
 
-
-
-Vertice *createVerticesArr(int **matrix, int nrows, int ncols){
-    Vertice *vertices;
-
-    vertices = (Vertice*)malloc(ncols * nrows * sizeof(Vertice));
-
+    // Array de vertices 
     int count=0;
 
     for(int i = 0; i < nrows; i++){
         for(int j = 0; j < ncols; j++){
-            vertices[count].value = matrix[i][j];
-            vertices[count].row = i;
-            vertices[count].col = j;
+            graph->vertices[count].value = matrix[i][j];
+            graph->vertices[count].row = i;
+            graph->vertices[count].col = j;
             count++;
         }
     }
 
-    return vertices;
-}
+    // Matrix de adjacencia
 
-int **createAdjMatrix(int **matrix, int nrows, int ncols, Vertice *vertices){
-    int adjMatrixSize = ncols * nrows;
+    graph->adjMatrix = (int **)malloc(graph->nvertices * sizeof(int*));
 
-    int **adjMatrix = (int **)malloc(adjMatrixSize * sizeof(int*));
-
-
-
-    for(int i = 0; i < adjMatrixSize; i++){
-        adjMatrix[i] = (int *)malloc(adjMatrixSize * sizeof(int));
+    for(int i = 0; i < graph->nvertices; i++){
+        graph->adjMatrix[i] = (int *)malloc(graph->nvertices * sizeof(int));
     } 
     
-    for(int i = 0; i < adjMatrixSize; i++){
-        for(int j = 0; j < adjMatrixSize; j++){
+    for(int i = 0; i < graph->nvertices; i++){
+        for(int j = 0; j < graph->nvertices; j++){
             
-            if((vertices[i].col + 1  == vertices[j].col && vertices[i].row  == vertices[j].row ) || (vertices[i].row + 1  == vertices[j].row && vertices[i].col == vertices[j].col)){
-                adjMatrix[i][j] = vertices[j].value;
+            if((graph->vertices[i].col + 1  == graph->vertices[j].col && graph->vertices[i].row  == graph->vertices[j].row ) || (graph->vertices[i].row + 1  == graph->vertices[j].row && graph->vertices[i].col == graph->vertices[j].col)){
+                graph->adjMatrix[i][j] = graph->vertices[j].value;
             }else{
-                adjMatrix[i][j] = INT_MAX;
+                graph->adjMatrix[i][j] = INT_MIN;
             }
         }
     }
-
-    return adjMatrix;
-
 }
