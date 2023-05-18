@@ -40,7 +40,8 @@ void createGraph(Graph *graph, int **matrix, int nrows, int ncols){
 
 
 
-
+// Algoritmo de bellmanford.
+// Acha o menor caminho em um grafo ponderado podendo conter pesos negativos
 void bellmanford(Graph graph, int start, int **pred) {
     int i, j, k;
     int dist[graph.nvertices];
@@ -81,7 +82,7 @@ void bellmanford(Graph graph, int start, int **pred) {
     }   
 }
 
-
+// Nega o grafo tranformando pesos negativos em positivos e vice-versa
 void negateGraph(Graph *graph){
     
     for(int i = 0; i < graph->nvertices; i++){
@@ -92,6 +93,16 @@ void negateGraph(Graph *graph){
         }
     }
 
+}
+
+void freeGraph(Graph *graph){
+    
+    free(graph->vertices);
+    for(int i = 0; i < graph->nvertices; i++){
+        free(graph->adjMatrix[i]);
+    }
+    free(graph->adjMatrix);
+    
 }
 
 

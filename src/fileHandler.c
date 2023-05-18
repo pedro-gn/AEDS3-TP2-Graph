@@ -14,7 +14,6 @@ int getNumberOfTests(FILE *inputFile){
     return nTests;
 }
 
-
 void readMatrix(FILE *inputFile, int *nrows, int *ncols, int ***matrix){
 
     fscanf(inputFile, "%d %d", nrows, ncols);
@@ -41,4 +40,14 @@ void writeFile(int *results, int numberOfTests){
     }
     fprintf(outputFile, "%d", results[numberOfTests-1]);
     fclose(outputFile);
+}
+
+
+void freeMatrix(int**matrix, int nrows) {
+
+    for (int i = 0; i < nrows; i++) {
+        free(matrix[i]); 
+    }
+
+    free(matrix); 
 }

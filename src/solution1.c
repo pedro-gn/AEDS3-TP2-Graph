@@ -1,6 +1,7 @@
 #include "../include/solution1.h"
 
 int solution1(Graph graph, int nrows, int ncols){
+    int result;
     int *pred;
     // Nega o grafo transformando as arestas positivas em negativas e vice versa
     negateGraph(&graph);
@@ -11,10 +12,13 @@ int solution1(Graph graph, int nrows, int ncols){
     // Nega o grafo novamente para voltar ao normal
     negateGraph(&graph);
     // Acha a energia minima para o caminho mais "longo"
-    lowestEnergy(graph, pred, nrows, ncols);    
+    result = lowestEnergy(graph, pred, nrows, ncols);
+    free(pred);
+    return result;
 }
 
 
+// Calcula a energia minima para ir do vertice 0 ao vertice final
 int lowestEnergy(Graph graph, int *pred, int nrows, int ncols){
     int beginE = 1; // energia minima de comeco
     int currE = 1;
@@ -37,7 +41,6 @@ int lowestEnergy(Graph graph, int *pred, int nrows, int ncols){
 
     path[0] = 0;
 
-
     // Acha a energia minima
     for( int i = 1; i < (nrows+ncols-1); i++){
         int vertex = path[i];
@@ -51,7 +54,6 @@ int lowestEnergy(Graph graph, int *pred, int nrows, int ncols){
 
     }
 
-    
     return beginE;
 
 }

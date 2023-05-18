@@ -24,6 +24,6 @@ void negateGraph(Graph *graph);
 
 void bellmanford(Graph graph, int start, int **pred);
 
-
+void freeGraph(Graph *graph);
 
 #endif

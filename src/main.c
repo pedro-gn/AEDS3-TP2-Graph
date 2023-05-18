@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "fileHandler.h"
 #include "graph.h"
 #include "solution1.h"
+
+
 int main(int argc, char *argv[]){
     FILE *inputFile;
     int strategy;
@@ -41,12 +44,14 @@ int main(int argc, char *argv[]){
             
         }else if(strategy == 2){
             // Algoritmo 2
-        }    
+        }
+        freeMatrix(testMatrix, nrows);
+        freeGraph(&graph);
     }
 
+    // Escreve o resultado no arquivo
     writeFile(results, numberOfTests);
     
-
     fclose(inputFile);
     return 0;
 }
