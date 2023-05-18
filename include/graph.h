@@ -20,5 +20,10 @@ typedef struct{
 
 void createGraph(Graph *graph, int **matrix, int nrows, int ncols);
 
+void negateGraph(Graph *graph);
+
+void bellmanford(Graph graph, int start, int **pred);
+
+
 
 #endif

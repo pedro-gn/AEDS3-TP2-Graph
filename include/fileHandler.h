@@ -7,6 +7,6 @@
 
 int getNumberOfTests(FILE *inputFile);
 void readMatrix(FILE *inputFile, int *rows, int *cols, int ***test);
-
+void writeFile(int *results, int numberOfTests);
 
 #endif

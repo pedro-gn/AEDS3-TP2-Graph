@@ -15,10 +15,6 @@ int getNumberOfTests(FILE *inputFile){
 }
 
 
-void freeMatrix(int **matrix){
-
-}
-
 void readMatrix(FILE *inputFile, int *nrows, int *ncols, int ***matrix){
 
     fscanf(inputFile, "%d %d", nrows, ncols);
@@ -35,4 +31,14 @@ void readMatrix(FILE *inputFile, int *nrows, int *ncols, int ***matrix){
         }
     }
 
+}
+
+void writeFile(int *results, int numberOfTests){
+    FILE *outputFile;
+    outputFile = fopen("saida.txt", "w");
+    for(int i = 0; i < numberOfTests-1; i++){
+        fprintf(outputFile, "%d\n", results[i]);
+    }
+    fprintf(outputFile, "%d", results[numberOfTests-1]);
+    fclose(outputFile);
 }

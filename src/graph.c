@@ -37,3 +37,61 @@ void createGraph(Graph *graph, int **matrix, int nrows, int ncols){
         }
     }
 }
+
+
+
+
+void bellmanford(Graph graph, int start, int **pred) {
+    int i, j, k;
+    int dist[graph.nvertices];
+    *pred = malloc(graph.nvertices * sizeof(int));
+
+    // Inicializa as distâncias de todos os vértices como "infinito"
+    for (i = 0; i < graph.nvertices; i++) {
+        dist[i] = INT_MAX;
+        (*pred)[i] = -1;
+    }
+    // A distância do vértice de início para ele mesmo é 0
+    dist[start] = 0;
+
+    // Relaxa as arestas repetidamente
+    for (i = 0; i < graph.nvertices - 1; i++) {
+        for (j = 0; j < graph.nvertices; j++) {
+            for (k = 0; k < graph.nvertices; k++) {
+                if (graph.adjMatrix[j][k] != INT_MIN) {
+                    if (dist[j] != INT_MAX && dist[j] + graph.adjMatrix[j][k] < dist[k]) {
+                        dist[k] = dist[j] + graph.adjMatrix[j][k];
+                        (*pred)[k] = j;
+                    }
+                }
+            }
+        }
+    }
+
+    // Verifica se há ciclos negativos
+    for (j = 0; j < graph.nvertices; j++) {
+        for (k = 0; k < graph.nvertices; k++) {
+            if (graph.adjMatrix[j][k] != INT_MIN) {
+                if (dist[j] != INT_MAX && dist[j] + graph.adjMatrix[j][k] < dist[k]) {
+                    printf("O grafo contém um ciclo negativo\n");
+                    return;
+                }
+            }
+        }
+    }   
+}
+
+
+void negateGraph(Graph *graph){
+    
+    for(int i = 0; i < graph->nvertices; i++){
+        for(int j = 0; j < graph->nvertices; j++){
+            if(graph->adjMatrix[i][j] != INT_MIN){
+                graph->adjMatrix[i][j] = ~graph->adjMatrix[i][j] + 1;
+            }
+        }
+    }
+
+}
+
+

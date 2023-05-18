@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "fileHandler.h"
 #include "graph.h"
-
+#include "solution1.h"
 int main(int argc, char *argv[]){
     FILE *inputFile;
     int strategy;
@@ -12,6 +12,7 @@ int main(int argc, char *argv[]){
     int **testMatrix;
     Graph graph;
 
+
     if(argc == 3){
         strategy = atoi(argv[1]);
         inputFile = fopen(argv[2], "r");
@@ -20,11 +21,9 @@ int main(int argc, char *argv[]){
         exit(1);
     }
 
-
-    // Resolução 
-
     // Numero de casos de testes no arquivo de entrada
     numberOfTests = getNumberOfTests(inputFile);
+    int results[numberOfTests];
 
     // Um dos testes por iteração
     for(int i = 0; i < numberOfTests; i++){
@@ -34,20 +33,19 @@ int main(int argc, char *argv[]){
 
         // Cria o grafo
         createGraph(&graph, testMatrix, nrows, ncols);
-
-
+        
 
         if(strategy == 1){
             // Algoritmo 1
+            results[i] = solution1(graph, nrows, ncols);
+            
         }else if(strategy == 2){
             // Algoritmo 2
-        }
-
-
-        
+        }    
     }
 
-
+    writeFile(results, numberOfTests);
+    
 
     fclose(inputFile);
     return 0;
