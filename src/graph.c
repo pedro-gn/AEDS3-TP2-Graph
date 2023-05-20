@@ -68,18 +68,7 @@ void bellmanford(Graph graph, int start, int **pred) {
             }
         }
     }
-
-    // Verifica se há ciclos negativos
-    for (j = 0; j < graph.nvertices; j++) {
-        for (k = 0; k < graph.nvertices; k++) {
-            if (graph.adjMatrix[j][k] != INT_MIN) {
-                if (dist[j] != INT_MAX && dist[j] + graph.adjMatrix[j][k] < dist[k]) {
-                    printf("O grafo contém um ciclo negativo\n");
-                    return;
-                }
-            }
-        }
-    }   
+   
 }
 
 // Nega o grafo tranformando pesos negativos em positivos e vice-versa

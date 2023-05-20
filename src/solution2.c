@@ -1,6 +1,6 @@
-#include "../include/solution1.h"
+#include "../include/solution2.h"
 
-int solution1(Graph graph, int nrows, int ncols){
+int solution2(Graph graph, int nrows, int ncols){
     int result;
     int *pred;
     // Nega o grafo transformando as arestas positivas em negativas e vice versa
